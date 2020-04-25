@@ -39,17 +39,61 @@ Rails.application.configure do
   
 
   config.active_record.dump_schema_after_migration = false
-  
 
-  # config.action_mailer.default_url_options = { host: 'agile-hamlet-34327.herokuapp.com' }
+  
+  
+  
+  config.action_mailer.default_url_options = { host: 'intense-inlet-32914.herokuapp.com' }
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    user_name: ENV['SENDGRID_USERNAME'],
+    password: ENV['SENDGRID_PASSWORD'],
+    domain: "heroku.com",
+    address: "smtp.SendGrid.net",
+    port: 587,
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
+  
+  # config.action_mailer.default_url_options = { host: '18.180.34.62' }
   # ActionMailer::Base.delivery_method = :smtp
   # ActionMailer::Base.smtp_settings = {
   #   user_name: ENV['SENDGRID_USERNAME'],
   #   password: ENV['SENDGRID_PASSWORD'],
-  #   domain: "heroku.com",
+  #   domain: "18.180.34.62",
   #   address: "smtp.SendGrid.net",
   #   port: 587,
   #   authentication: :plain,
-  #   enable_starttls_auto: true
+  #   enable_starttls_auto: truee
   # }
+
+
+  # config.action_mailer.default_url_options = 
+  #   ENV['HEROKU'] == 'intense-inlet-32914.herokuapp.com' ? 
+  #     { host: 'intense-inlet-32914.herokuapp.com' } :
+  #     { host: '18.180.34.62' }
+  
+  # ActionMailer::Base.delivery_method = :smtp
+  # ActionMailer::Base.smtp_settings = 
+  # ENV['HEROKU'] == 'intense-inlet-32914.herokuapp.com' ? 
+  #   {
+  #     user_name: ENV['SENDGRID_USERNAME'],
+  #     password: ENV['SENDGRID_PASSWORD'],
+  #     domain: "heroku.com",
+  #     address: "smtp.SendGrid.net",
+  #     port: 587,
+  #     authentication: :plain,
+  #     enable_starttls_auto: true
+  #   } :
+  #   {
+  #     user_name: ENV['SENDGRID_USERNAME'],
+  #     password: ENV['SENDGRID_PASSWORD'],
+  #     domain: "18.180.34.62",
+  #     address: "smtp.SendGrid.net",
+  #     port: 587,
+  #     authentication: :plain,
+  #     enable_starttls_auto: true
+  #   }
+
+  
 end
